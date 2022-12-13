@@ -1,0 +1,106 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using Projet_2022.Models.Entities
+@using Projet_2022.Models.ViewModels;
+@model ProductCategoriesBrands;
+@inject UserManager<User> UserManager;
+
+<section class="navbar main-menu">
+	<div class="navbar-inner main-menu">
+		<a href="index.html" class="logo pull-left"><img src="~/themes/images/logo.png" class="site_logo" alt=""></a>
+		<nav id="menu" class="pull-right">
+			<ul>
+				@foreach (var item in Model.Brands)
+				{
+					<li><a asp-action="Brand" asp-controller="Brand" asp-route-id=@item.Id>@item.Name</a></li>
+				}
+			</ul>
+		</nav>
+	</div>
+</section>
+<section class="header_text sub">
+<img class="pageBanner" src="~/themes/images/pageBanner.png" alt="New products" >
+	<h4><span>Product @Model.Product.Name</span></h4>
+</section>
+<section class="main-content">				
+	<div class="row">						
+		<div class="span9">
+			<div class="row">
+				<div class="span4">
+					<a  class="thumbnail" data-fancybox-group="group1" title="Description 1"><img alt="" style="height:342px;width:342px;" src=@Model.Product.PrincipalImage></a>												
+					<ul class="thumbnails small">	
+						@foreach (var item in Model.Product.ProductGalleryImages)
+						{
+							<li class="span1">
+								<a class="thumbnail" data-fancybox-group="group1" title="Description 2"><img src=@item.Image alt=""></a>
+							</li>	
+						}
+					</ul>
+				</div>
+				<div class="span5">
+					<address>
+						<strong>Brand:</strong> <span>@Model.Product.Brand.Name</span><br>
+						<strong>Category:</strong> <span>@Model.Product.Category.Name</span><br>
+						<strong>Product Sku:</strong> <span>@Model.Product.Sku</span><br>
+						<strong>Product Slug:</strong> <span>@Model.Product.Slug</span><br>
+						<strong>Availability:</strong> <span>@Model.Product.StockStatus</span><br>
+						<strong>Ratings</strong> <span>@Model.Product.Ratings</span><br>
+					</address>									
+					<h4><strong>Price: $@Model.Product.Price </strong></h4>
+				</div>
+				@if (User.Identity.IsAuthenticated)
+				{
+					<div class="span5">
+							<p>&nbsp;</p>
+							<a asp-controller="Order" asp-action="AddToCart" asp-route-id=@Model.Product.Id >
+								<button class="btn btn-inverse" >Add to Cart</button>
+							</a>
+						@if (User.IsInRole("Admin")||User.IsInRole("Employee"))
+						{
+							<p> &nbsp;</p>
+							<a asp-controller="Product" asp-action="Edit" asp-route-id=@Model.Product.Id>
+								<button class="btn btn-inverse"> Edit Product</button>
+							</a>
+							<p> &nbsp;</p>
+							<form asp-controller="Product" asp-action="Delete" asp-route-id=@Model.Product.Id>
+									<input type="submit" value="Delete Product" class="btn btn-inverse"/>
+							</form>
+
+						}
+					</div>	
+				}
+			</div>
+			<div class="row">
+				<div class="span9">
+					<ul class="nav nav-tabs" id="myTab">
+						<li class="active"><a href="#home">Description</a></li>
+
+					</ul>							 
+					<div class="tab-content">
+						<div class="tab-pane active" id="home">@Model.Product.Description</div>
+						<div class="tab-pane" id="profile">
+							<table class="table table-striped shop_attributes">	
+								<tbody>
+									<tr class="">
+										<th>Size</th>
+										<td>Large, Medium, Small, X-Large</td>
+									</tr>		
+								</tbody>
+							</table>
+						</div>
+					</div>							
+				</div>						
+			</div>
+		</div>
+		<div class="span3 col">
+			<div class="block">
+				<ul class="nav nav-list below">
+					<li class="nav-header">Categories</li>
+					@foreach (var item in Model.Categories)
+					{
+						<li><a asp-controller="Category" asp-action="Category" asp-route-id=@item.Id>@item.Name</a></li>
+					}
+				</ul>
+			</div>
+		</div>
+	</div>
+</section>			

@@ -1,0 +1,46 @@
+﻿@using Projet_2022.Views.ViewModels
+@model LoginVM;
+
+@{
+	ViewData["Title"] = "Sign in";
+}
+
+
+<section class="header_text sub">
+	<img class="pageBanner" src="~/themes/images/pageBanner.png" alt="New products">
+</section>
+<section class="main-content">
+	<div class="row">
+		<form asp-action="Login">
+			<div class="span5">
+				<h4 class="title"><span class="text"><strong>Login</strong> Form</span></h4>
+			</div>
+			<div class="span7">
+				<h4 class="title">
+					<div asp-validation-summary="ModelOnly"></div>
+				</h4>
+				<fieldset>
+					<div class="control-group">
+						<label class="control-label">Email:</label>
+						<div class="controls">
+							<input type="text" asp-for="Email" placeholder="Enter your Email"  class="input-xlarge">
+							<span asp-validation-for="Email"></span>
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">Password:</label>
+						<div class="controls">
+							<input type="password" asp-for="Password" placeholder="Write password" id="password" class="input-xlarge">
+							<span asp-validation-for="Password"></span>
+						</div>
+					</div>
+					<hr>
+					<div class="control-group">
+						<p style="color:red">@TempData["Error"]</p>
+					</div>
+					<div class="actions"><input tabindex="9" class="btn btn-inverse large" type="submit" value="Login"></div>
+				</fieldset>
+			</div>
+		</form>
+	</div>
+</section>

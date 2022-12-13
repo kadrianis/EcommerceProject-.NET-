@@ -1,0 +1,153 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using Projet_2022.Models.Entities
+@inject UserManager<User> UserManager;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Projet 2022</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+
+	<link href="~/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="~/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" />
+	<link href="~/themes/css/bootstrappage.css" rel="stylesheet" />
+
+
+	<link href="~/themes/css/flexslider.css" rel="stylesheet" />
+	<link href="~/themes/css/main.css" rel="stylesheet" />
+
+	<script src="~/themes/js/jquery-1.7.2.min.js"></script>
+	<script src="~/bootstrap/js/bootstrap.min.js"></script>
+	<script src="~/themes/js/superfish.js"></script>
+	<script src="~/themes/js/jquery.scrolltotop.js"></script>
+</head>
+<body style="background:white;">
+
+	<div id="top-bar" class="container">
+		<div class="row">
+			<div class="span4">
+			</div>
+			<div class="span8">
+				<div class="account pull-right">
+					@if (User.Identity.IsAuthenticated)
+					{
+						<ul class="user-menu">
+							@if (User.IsInRole("Admin"))
+							{
+								<li><a asp-controller="Order" asp-action="Index">Orders</a></li>
+
+								<li>
+									<a asp-controller="Product" asp-action="Stock">Stock</a>
+								</li>
+								<li>
+									<a asp-controller="Product" asp-action="Create">Create Product</a>
+								</li>
+
+								<li>
+									<a asp-controller="Account" asp-action="CreateEmployee">Create Employee</a>
+								</li>
+								<li>
+									<a asp-controller="Account" asp-action="Users"> Users</a>
+								</li>
+							}
+							@if (User.IsInRole("Client"))
+							{
+								<li><a asp-controller="Account" asp-action="MyAccount">My Account</a></li>
+								<li><a asp-controller="Order" asp-action="Cart" >Your Cart</a></li>
+
+							}
+															<li>
+									<form asp-controller="Account" asp-action="Logout">
+										<button>
+											<a>Log out</a>
+										</button>
+									</form>
+								</li>
+							<li>
+								<a asp-controller="Product" asp-action="Index"><img src="~/themes/images/logo.png" style="height:30px;width:113px;"></a>
+							</li>
+
+						</ul>
+					}
+					else{
+					<ul class="user-menu">
+
+						<li><a asp-controller="Account" asp-action="Login">Login</a></li>
+						<li><a asp-controller="Account" asp-action="Register">Register</a></li>
+						<li>
+							<a asp-controller="Product" asp-action="Index"><img src="~/themes/images/logo.png" style="height:30px;width:113px;"></a>
+						</li>
+					</ul>
+					}
+
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="wrapper" class="container">
+			@RenderBody()
+		<div>
+			<section id="footer-bar"  >
+			<div class="row">
+				@if (User.Identity.IsAuthenticated)
+				{
+					<div class="span3">
+						<a asp-controller="Order" asp-action="Cart">
+							<h4>Cart</h4>
+						</a>
+					</div>
+					<div class="span4">
+						<a asp-controller="Account" asp-action="MyAccount">
+							<h4>My Account</h4>
+						</a>
+					</div>
+					<div>
+						<a asp-controller="Product" asp-action="Index"><img src="~/themes/images/logo.png" style="height:30px;width:113px;"></a>
+					</div>
+				}
+				else 
+				{
+					<div class="span3">
+						<a asp-controller="Account" asp-action="Register">
+						<h4>Register</h4>
+						</a>
+					</div>
+					<div class="span4">
+						<a asp-controller="Account" asp-action="Login">
+							<h4>Login</h4>
+						</a>
+					</div>
+					<div>
+						<a asp-controller="Product" asp-action="Index">
+							<img src="~/themes/images/logo.png" style="height:25px;width:100px;padding-top:10px;">
+						</a>
+					</div>
+				}
+			</div>
+		</section>
+		<section id="copyright" >
+			<span>Projet 2022. Tous les droits sont réservés.</span>
+		</section>
+		</div>
+	</div>
+	<script src="~/themes/js/jquery.flexslider-min.js"></script>
+	<script type="text/javascript">
+		$(function () {
+			$(document).ready(function () {
+				$('.flexslider').flexslider({
+					animation: "fade",
+					slideshowSpeed: 4000,
+					animationSpeed: 600,
+					controlNav: false,
+					directionNav: true,
+					controlsContainer: ".flex-container" // the container that holds the flexslider
+				});
+			});
+		});
+	</script>
+	    @await RenderSectionAsync("Scripts", required: false)
+
+</body>
+</html>

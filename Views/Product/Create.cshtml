@@ -1,0 +1,96 @@
+﻿@using Projet_2022.Models.ViewModels
+
+@{
+    ViewData["Title"]="Create Product";
+}
+@model ProductVM;
+<div class="row text">
+    <div style="padding-left:250px;" class="col-md-8 offset-2">
+        <p>
+            <h1>Add a New Product</h1>
+        </p>
+        <div  class="row">
+            <div class="col-md-8 offset-2">
+                <form asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="form-group text-center">
+                        <img id="PrincipalImage"  class="border-info rounded-circle" style="max-width: 150px" />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="PrincipalImage" class="control-label"></label>
+                        <input asp-for="PrincipalImage" class="form-control" />
+                        <span asp-validation-for="PrincipalImage" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Name" class="control-label"></label>
+                        <input asp-for="Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Sku" class="control-label"></label>
+                        <input asp-for="Sku" class="form-control" />
+                        <span asp-validation-for="Sku" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Slug" class="control-label"></label>
+                        <input asp-for="Slug" class="form-control" />
+                        <span asp-validation-for="Slug" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Description" class="control-label"></label>
+                        <input asp-for="Description" class="form-control" />
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Ratings" class="control-label"></label>
+                        <input asp-for="Ratings" class="form-control" />
+                        <span asp-validation-for="Ratings" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Price" class="control-label"></label>
+                        <input asp-for="Price" class="form-control" />
+                        <span asp-validation-for="Price" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="TotalSales" class="control-label"></label>
+                        <input asp-for="TotalSales" class="form-control" />
+                        <span asp-validation-for="TotalSales" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="StockStatus" class="control-label"></label>
+                        <input asp-for="StockStatus" class="form-control" />
+                        <span asp-validation-for="StockStatus" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="IdCategory" class="control-label"></label>
+                        <input asp-for="IdCategory" placeholder="" class="form-control" />
+                        <span asp-validation-for="IdCategory" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="IdBrand" class="control-label"></label>
+                        <input asp-for="IdBrand" type="datetime" placeholder="" class="form-control" />
+                        <span asp-validation-for="IdBrand" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="submit" value="Create" class="btn btn-outline-success float-right" />
+                        <a class="btn btn-outline-secondary" asp-action="Index">Show All</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            var output = document.getElementById('PrincipalImage');
+            output.src = $("#PrincipalImage").val();
+        })
+        $("#PincipalImage").on("change", function () {
+            var output = document.getElementById('PrincipalImage');
+            output.src = $(this).val();
+        })
+    </script>
+}

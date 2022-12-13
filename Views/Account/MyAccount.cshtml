@@ -1,0 +1,51 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using Projet_2022.Models.Entities
+@model User;
+
+@{
+	ViewData["Title"] = "My Account";
+}
+
+<section class="header_text sub">
+	<img class="pageBanner" src="~/themes/images/pageBanner.png" alt="New products">
+	<h4><span> @(Model.FirstName+" "+Model.LastName)</span></h4>
+</section>
+<section class="main-content">
+	<div class="row">
+		<div class="span9">
+			<div class="row">
+
+				<div class="span5">
+					<address>
+						<strong>City:</strong> <span>@Model.City</span><br>
+						<strong>ZipCode:</strong> <span>@Model.Zipcode</span><br>
+						<strong>Address:</strong> <span>@Model.Address</span><br>
+						<strong>Phone:</strong> <span>@Model.Phone</span><br>
+					</address>
+				</div>
+				<div class="span5" style="display:flex;">
+					<p>&nbsp;</p>
+					<a asp-controller="Account" asp-action="Edit" asp-route-id=@Model.Id>
+						<button class="btn btn-inverse">Edit Information</button>
+					</a>
+				@if (User.Identity.IsAuthenticated && User.IsInRole("Employee"))
+				{
+					<p>&nbsp;</p>
+					<p>&nbsp;</p>
+					<p>&nbsp;</p>
+					<a asp-controller="Account" asp-action="Demander un congé">
+						<button class="btn btn-inverse">Demander Un congé</button>
+					</a>
+				}
+					<p>&nbsp;</p>
+					<p>&nbsp;</p>
+					<p>&nbsp;</p>
+					<a asp-controller="Account" asp-action="Delete">
+						<button class="btn btn-inverse">Delete</button>
+					</a>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</section>

@@ -1,0 +1,82 @@
+﻿@using Projet_2022.Models.ViewModels
+
+@model EditVM;
+
+@{
+    ViewData["Title"] = "Edit an account";
+}
+
+<section class="header_text sub">
+<img class="pageBanner" src="~/themes/images/pageBanner.png" alt="New products" >
+	<h4><span>Lorem Ipsum Zeppiw</span></h4>
+</section>			
+<section class="main-content">				
+	<div class="row">
+		<form asp-action="Register">
+			<div class="span5">					
+				<h4 class="title"><span class="text"><strong>Register</strong> Form</span></h4>
+					<input type="hidden" name="next" value="/">
+					<fieldset>
+						<div class="control-group">
+							<label class="control-label">Firstname:</label>
+							<div class="controls">
+								<input asp-for="FirstName" type="text" placeholder="Enter your firstname" class="input-xlarge"/>
+								<span asp-validation-for="FirstName" style="color:red"></span>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">Lastname:</label>
+							<div class="controls">
+								<input asp-for="LastName" type="text" placeholder="Enter your lastname" class="input-xlarge">
+								<span asp-validation-for="LastName" style="color:red"></span>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">Phone:</label>
+							<div class="controls">
+								<input asp-for="Phone" type="text" placeholder="Enter your phone number" class="input-xlarge">
+								<span asp-validation-for="Phone" style="color:red"></span>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">Address:</label>
+							<div class="controls">
+								<input asp-for="Address" type="text" placeholder="Enter your address" class="input-xlarge">
+								<span asp-validation-for="Address" style="color:red"></span>
+							</div>
+						</div>
+
+					</fieldset>				
+			</div>
+			<div class="span7">					
+				<h4 class="title"><div asp-validation-summary="ModelOnly"></div>
+					</h4>
+					<fieldset>
+
+
+						<div class="control-group">
+							<label class="control-label">City:</label>
+							<div class="controls">
+								<input asp-for="City" type="text" placeholder="Enter your city" class="input-xlarge">
+								<span asp-validation-for="City" style="color:red"></span>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">Zip Code:</label>
+							<div class="controls">
+								<input asp-for="Zipcode" type="text" placeholder="Enter your Zip Code" class="input-xlarge">
+								<span asp-validation-for="Zipcode" style="color:red"></span>
+							</div>
+						</div>
+						<hr>
+						<div class="control-group">
+							<p style="color:red">@TempData["Error"]</p>
+						</div>
+						<div class="actions">
+							<input tabindex="9" class="btn btn-inverse large" type="submit" value="Create your account">
+						</div>
+					</fieldset>		
+			</div>
+		</form>	
+	</div>
+</section>

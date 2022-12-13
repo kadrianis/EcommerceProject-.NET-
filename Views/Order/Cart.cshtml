@@ -1,0 +1,69 @@
+﻿@using Projet_2022.Models.ViewModels
+@model CartVM;
+@{
+	ViewData["Title"] = "Cart Summary";
+}
+<section class="header_text sub">
+	<img class="pageBanner" src="~/themes/images/pageBanner.png" alt="New products">
+	<h4><span>Shopping Cart</span></h4>
+</section>
+<section class="main-content">
+	<div class="row">
+		<div class="span9">
+			<h4 class="title"><span class="text"><strong>Your</strong> Cart</span></h4>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Image</th>
+						<th>Product Name</th>
+						<th>Quantity</th>
+						<th>Add Item</th>
+						<th>Remove Item</th>
+						<th>Unit Price</th>
+						<th>Total</th>
+					</tr>
+				</thead>
+				<tbody>
+					@foreach (var item in Model.Cart.CartItems)
+					{
+						<tr>
+							<td><a><img src=@item.Product.PrincipalImage style="height:50px;width:50px;" ></a></td>
+							<td>@item.Product.Name</td>
+							<td>@item.Amount</td>
+							<td><button style="background-color: #4CAF50;padding: 3px 25px;"></button></td>
+							<td><button style="background-color: #f44336;padding: 3px 25px;"></button></td>
+							<td>@item.Product.Price</td>
+							<td>@((item.Amount*item.Product.Price).ToString("c"))</td>
+						</tr>
+					}
+				</tbody>
+			</table>
+
+
+			<hr>
+			<p class="cart-total right">
+			<strong>Total Before Tax</strong>$@Model.Cart.GetCartTotal().ToString("c")<br>
+			<strong>Tax(18%)</strong>: $@Model.Cart.GetCartTax().ToString("c")<br>
+			<strong>Total</strong>: $@Model.Cart.GetCartAfterTax().ToString("c")<br>
+			</p>
+			<hr />
+			<p class="buttons center">
+				<a asp-controller="Order" asp-action="OrderCompleted">
+					<button class="btn btn-inverse" type="submit" id="checkout">Checkout</button>
+				</a>
+			</p>
+		</div>
+		<div class="span3 col">
+			<div class="block">
+				<ul class="nav nav-list below">
+					<li class="nav-header"><a asp-controller="Brand" asp-action="Index">All Brands</a></li>
+
+					@foreach (var item in Model.Brands)
+					{
+						<li><a asp-controller="Brand" asp-action="Brand" asp-route-id=@item.Id>@item.Name</a></li>
+					}
+				</ul>
+			</div>
+		</div>
+	</div>
+</section>

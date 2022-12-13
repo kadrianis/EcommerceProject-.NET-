@@ -1,0 +1,39 @@
+﻿@using Projet_2022.Models.Entities
+@{
+	ViewData["Title"] = "Stock for Admin";
+}
+@model IEnumerable<Product>;
+<section class="header_text sub">
+	<img class="pageBanner" src="~/themes/images/pageBanner.png" alt="New products">
+	<h4><span>Stock for Admin</span></h4>
+</section>
+<section class="main-content">
+	<div class="row">
+		<div class="span9">
+			<h4 class="title"><span class="text"><strong>Your</strong> Cart</span></h4>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Image</th>
+						<th>Product Name</th>
+						<th>Quantity Available</th>
+						<th>Quantity bought</th>
+						<th>Unit Price</th>
+					</tr>
+				</thead>
+				<tbody>
+					@foreach (var item in Model)
+					{
+						<tr>
+							<td><a ><img src=@item.PrincipalImage style="height:50px;width:50px;" ></a></td>
+							<td>@item.Name</td>
+							<td>@item.StockStatus</td>
+							<td>@item.TotalSales</td>
+							<td>@item.Price</td>
+						</tr>
+					}
+				</tbody>
+			</table>
+		</div>
+	</div>
+</section>

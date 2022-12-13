@@ -1,0 +1,47 @@
+﻿@using Projet_2022.Models.ViewModels
+
+@{
+	ViewData["Title"] = "All Brands";
+}
+@model BrandsCategoriesVM;
+
+<section class="navbar main-menu">
+	<div class="navbar-inner main-menu">
+		<nav id="menu" class="pull-right">
+			<ul>
+				@foreach (var item in Model.Categories)
+				{
+					<li><a asp-action="Category" asp-controller="Category" asp-route-id=@item.Id>@item.Name</a></li>
+				}
+			</ul>
+		</nav>
+	</div>
+</section>
+<section class="header_text sub">
+	<img class="pageBanner" src="~/themes/images/pageBanner.png" alt="New products">
+	<h4><span>All Bands</span></h4>
+</section>
+<section class="main-content">
+
+	<div class="row">
+		<div class="span9">
+			<ul class="thumbnails listing-products">
+				@foreach (var item in Model.Brands)
+				{
+					<li class="span3">
+						<div class="product-box">
+							<span class="sale_tag"></span>
+							<a asp-controller="Brand" asp-action="Brand" asp-route-id=@item.Id><img src=@item.Logo style="height:270px;width:270px"></a><br />
+							<a asp-controller="Brand" asp-action="Brand" asp-route-id=@item.Id class="title">@item.Name</a><br />
+							<a href="#" class="category">@item.Name</a>
+							<p class="price">Click to see products</p>
+						</div>
+					</li>
+				}
+			</ul>
+			<hr>
+
+		</div>
+
+	</div>
+</section>

@@ -1,0 +1,57 @@
+﻿@using Projet_2022.Models.Entities
+@{
+    ViewData["Title"] = "See Users";
+}
+@model IEnumerable<User>;
+<section class="header_text sub">
+	<img class="pageBanner" src="~/themes/images/pageBanner.png" alt="New products">
+	<h4><span>Shopping Cart</span></h4>
+</section>
+<section class="main-content">
+	<div class="row">
+		<div class="span9">
+			<h4 class="title"><span class="text"><strong>Your</strong> Cart</span></h4>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>City</th>
+						<th>Phone</th>
+						<th>Employee</th>
+						<th>Job</th>
+						<th>Manager</th>
+						<th> HireDate</th>
+					</tr>
+				</thead>
+				<tbody>
+					@foreach (var item in Model)
+					{
+						<tr>
+
+							<td>@(item.FirstName+" "+item.LastName)</td>
+							<td>@item.City</td>
+							<td>@item.Phone</td>
+							@if(item.Employee==true)
+							{
+								<td>Yes</td>
+								<td>@item.Job.JobTitle</td>
+								<td>@(item.Manager.FirstName+" "+item.Manager.LastName)</td>
+								<td>@item.HireDate.ToString("mm/dd/yyyy")</td>
+							}
+							else
+							{
+								<td>No</td>
+								<td></td>
+								<td></td>
+								<td></td>
+							}
+							<td><a asp-controller="Account" asp-action="DeleteAccount" asp-route-id=@item.Id><button>Delete Account</button></a></td>
+						</tr>
+					}
+				</tbody>
+			</table>
+		</div>
+
+	</div>
+</section>
+
